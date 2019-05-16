@@ -33,7 +33,6 @@ class LoginForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-
         <Input
           placeholder='Username'
           value={this.state.username}
@@ -53,10 +52,6 @@ class LoginForm extends Component {
       </form>
     )
   }
-}
-
-
-LoginForm.propTypes = {
 }
 
 export default LoginForm
