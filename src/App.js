@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import LoginForm from './Components/LoginForm/LoginForm'
 import { 
   BrowserRouter as Router,
   Link,
@@ -14,6 +13,11 @@ import { ApolloProvider } from 'react-apollo'
 import { AUTH_TOKEN, API_KEY } from './constants'
 import {isAuthenticated} from './helpers/auth'
 import PrivateRoute from './Components/Routes/PrivateRoute'
+//Custom Components
+import LoginForm from './Components/LoginForm/LoginForm'
+import RecipientList from './Components/RecipientList/RecipientList'
+import SubmissionList from './Components/SubmissionList/SubmissionList'
+
 
 
 const client = new ApolloClient({
@@ -22,12 +26,9 @@ const client = new ApolloClient({
     'ACCEPT': 'application/json',
     'Content-Type': 'application/json',
     'X-Api-Key': API_KEY,
+    'Authorization': isAuthenticated(),
   }
 });
-
-let Home = () => {
-  return (<h2>home</h2>)
-}
 
 function App() {
   return (
@@ -37,7 +38,8 @@ function App() {
           <h1>NewStory Demo App</h1>
           <Switch>
             <Route exact path='/login' component={LoginForm} />
-            <PrivateRoute exact path='/' component={Home} />
+            <PrivateRoute exact path='/' component={RecipientList} />
+            <PrivateRoute exact path='/submissions' component={SubmissionList} />
           </Switch>
         </div>
       </Router>

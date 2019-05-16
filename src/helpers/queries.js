@@ -13,3 +13,23 @@ export const SIGN_IN = gql`
 	  }
 	}
 `
+
+export const GET_RECIPIENTS = gql`
+	query {
+		recipients {
+			uuid
+			name
+			submissionUuids
+		}
+	}
+`
+export const GET_SUBMISSIONS = gql`
+	query ($id: String!) {
+		submissions(recipientUuid: $id) {
+			uuid
+			questionResponses {
+				sourceValue
+			}
+		}
+	}
+`
