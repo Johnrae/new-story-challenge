@@ -10,7 +10,7 @@ class SubmissionDetail extends Component {
 
   render() {
  		let {questionResponses: responses} = this.props.location.state
- 		console.log(this.props.location.state)
+
     return (
     	<React.Fragment>
 		   <h1>Questions and Answers</h1>
@@ -18,7 +18,6 @@ class SubmissionDetail extends Component {
 	     	{({loading, error, data}) => {
 		      if (loading) return "Loading..."
 		      if (error) return "Something went wrong. Oops."
-		      console.log('submission data', data)
 		    	return (
 		      	<div>
 			      	{ // sorry about this loop, yikes
@@ -34,6 +33,7 @@ class SubmissionDetail extends Component {
 			      							<p>{response.sourceValue}</p>
 			      						</div>
 			      				)}
+			      				return null
 		      				})
 			      	})}
 			      </div>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button'
 import {Mutation} from 'react-apollo'
@@ -10,8 +9,6 @@ class LoginForm extends Component {
   constructor(props) {
     super(props)
   
-    this.usernameInput = React.createRef()
-    this.passwordInput = React.createRef()
     this.state = {
       username: '',
       password: ''
@@ -29,7 +26,6 @@ class LoginForm extends Component {
   }
 
   handleSubmit = (e, signInUser) => {
-    console.log(this.state)
     e.preventDefault()
     signInUser({
       variables: {

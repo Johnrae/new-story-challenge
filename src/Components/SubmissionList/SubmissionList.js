@@ -9,7 +9,7 @@ class SubmissionList extends Component {
 	}
 
   render() {
-  	let {name, submissionUuids, uuid: recipientId} = this.props.location.state
+  	let {name, uuid: recipientId} = this.props.location.state
 
     return (
     	<React.Fragment>
@@ -32,6 +32,7 @@ class SubmissionList extends Component {
 			      				 	</p>
 			      				)
 			      			}
+			      			return null
 			      		})
 			      	}
 			      </div>

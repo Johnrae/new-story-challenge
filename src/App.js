@@ -2,15 +2,12 @@ import React from 'react';
 import './App.css';
 import { 
   BrowserRouter as Router,
-  Link,
   Route,
-  withAuth,
-  Redirect,
   Switch
 } from 'react-router-dom'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
-import { AUTH_TOKEN, API_KEY } from './constants'
+import { API_KEY } from './constants'
 import {isAuthenticated} from './helpers/auth'
 import PrivateRoute from './Components/Routes/PrivateRoute'
 //Custom Components
