@@ -5,18 +5,13 @@ import {GET_SUBMISSIONS} from '../../helpers/queries'
 
 class SubmissionList extends Component {
 
-	handleSubmissionClick = (recipient) => {
-		console.log(recipient)
-		this.props.history.push('/submissions', {...recipient})
-	}
-
   render() {
-  	let {name, uuid} = this.props.location.state
+  	let {name, submissionUuids, uuid: recipientId} = this.props.location.state
   	console.log(this.props.location.state)
     return (
     	<React.Fragment>
 		   <h1>Submissions for {name}</h1>
-	     <Query query={GET_SUBMISSIONS} variables={{id: uuid}}>
+	     <Query query={GET_SUBMISSIONS}>
 	     	{({loading, error, data}) => {
 		      if (loading) return "Loading..."
 		      if (error) return "Something went wrong. Oops."
@@ -24,8 +19,11 @@ class SubmissionList extends Component {
 		      	<div>
 			      	{
 			      		data.submissions.map((submission) => {
-			      			let {uuid} = submission
-			      			return <p>Submission!</p>
+			      			console.log(submission)
+			      			let { uuid, recipientUuid } = submission
+			      			if (recipientUuid === recipientId) {
+			      				return <p key={uuid}>Submission!</p>
+			      			}
 			      		})
 			      	}
 			      </div>
