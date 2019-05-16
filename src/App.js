@@ -17,6 +17,7 @@ import PrivateRoute from './Components/Routes/PrivateRoute'
 import LoginForm from './Components/LoginForm/LoginForm'
 import RecipientList from './Components/RecipientList/RecipientList'
 import SubmissionList from './Components/SubmissionList/SubmissionList'
+import SubmissionDetail from  './Components/SubmissionDetail/SubmissionDetail'
 
 
 
@@ -40,6 +41,8 @@ function App() {
             <Route exact path='/login' component={LoginForm} />
             <PrivateRoute exact path='/' component={RecipientList} />
             <PrivateRoute exact path='/submissions' component={SubmissionList} />
+            <PrivateRoute exact path='/submissions/:id' component={SubmissionDetail} />
+            <PrivateRoute exact path='/whoops' component={() => (<p>I would love for you to have questions statics, sweet baby route. Unfortunately you aren't ready.</p>)} />
           </Switch>
         </div>
       </Router>

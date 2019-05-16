@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import {GET_SUBMISSIONS} from '../../helpers/queries'
 
 class SubmissionList extends Component {
 
+	handleSubmissionClick = (submission) => {
+		return this.props.history.push(`/submissions/${submission.uuid}`, {...submission})
+	}
+
   render() {
   	let {name, submissionUuids, uuid: recipientId} = this.props.location.state
-  	console.log(this.props.location.state)
+
     return (
     	<React.Fragment>
 		   <h1>Submissions for {name}</h1>
@@ -18,11 +21,16 @@ class SubmissionList extends Component {
 		    	return (
 		      	<div>
 			      	{
-			      		data.submissions.map((submission) => {
-			      			console.log(submission)
+			      		data.submissions.map((submission, i) => {
 			      			let { uuid, recipientUuid } = submission
 			      			if (recipientUuid === recipientId) {
-			      				return <p key={uuid}>Submission!</p>
+			      				return (
+			      				 	<p 
+			      				 		onClick={() => this.handleSubmissionClick(submission)} 
+			      				 		key={uuid}>
+			      				 			Submission, view answers ->
+			      				 	</p>
+			      				)
 			      			}
 			      		})
 			      	}

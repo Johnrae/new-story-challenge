@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import {GET_RECIPIENTS} from '../../helpers/queries'
 
@@ -22,16 +21,14 @@ class RecipientList extends Component {
 			      	{
 			      		data.recipients.map((recipient) => {
 			      			let {uuid, submissionUuids, name} = recipient
-			      			if ( submissionUuids.length ) {
 			      				return (
 											<div
 												key={uuid}
 												onClick={() => this.handleRecipientClick(recipient)}
 											>
-												<p>{name}</p>
+												<p>{name} - Submissions: {submissionUuids.length}</p>
 											</div>
 			      				)
-			      			}
 			      		})
 			      	}
 			      </div>

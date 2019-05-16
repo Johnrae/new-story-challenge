@@ -23,12 +23,14 @@ export const GET_RECIPIENTS = gql`
 		}
 	}
 `
-export const GET_SUBMISSIONS =  gql`
+export const GET_SUBMISSIONS = gql`
  	query {
 		submissions {
 			uuid
 			recipientUuid
 			questionResponses {
+				uuid
+				questionVersionUuid
 				sourceValue
 			}
 		}
@@ -47,3 +49,16 @@ export const GET_SUBMISSIONS =  gql`
 // 		}
 // 	}
 // `
+
+export const GET_SINGLE_SUBMISSION =  gql`
+ 	query {
+		questionVersions {
+			uuid
+			questionContexts {
+				uuid
+				contextPermalink
+				label
+			}
+		}
+ 	}
+`
