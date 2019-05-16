@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button'
+import {Mutation} from 'react-apollo'
+import {SIGN_IN} from '../../helpers/queries'
+import {setAuth} from '../../helpers/auth'
 
 class LoginForm extends Component {
   constructor(props) {
@@ -25,31 +28,50 @@ class LoginForm extends Component {
     this.setState({password})
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = (e, signInUser) => {
     console.log(this.state)
     e.preventDefault()
+    signInUser({
+      variables: {
+        email: this.state.username,
+        password: this.state.password
+      }
+    })
+  }
+
+  completeAuth = (res) => {
+    // set the auth token
+    setAuth(res)
+    // redirect to home
+    this.props.history.push('/')
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Input
-          placeholder='Username'
-          value={this.state.username}
-          onChange={this.updateUsername}
-        />
-        <br/>
-        <Input
-          placeholder='Password'
-          value={this.state.password}
-          onChange={this.updatePassword}
-          type='password'
-        />
-      	<br/>
-      	<Button type="submit">
-      		Log in
-      	</Button>
-      </form>
+      // TODO: Set up error handling, check for invalid email and password.
+      <Mutation mutation={SIGN_IN} onCompleted={this.completeAuth}>
+      {(signInUser, {loading, error}) => (
+          <form onSubmit={(e) => this.handleSubmit(e, signInUser)}>
+            <Input
+              placeholder='Username'
+              value={this.state.username}
+              onChange={this.updateUsername}
+            />
+            <br/>
+            <Input
+              placeholder='Password'
+              value={this.state.password}
+              onChange={this.updatePassword}
+              type='password'
+            />
+            <br/>
+            {error && <p>Something went wrong!</p>}
+            <Button type="submit">
+              Log in
+            </Button>
+          </form>
+        )}
+      </Mutation>
     )
   }
 }

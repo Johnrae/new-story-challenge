@@ -11,21 +11,23 @@ import {
 } from 'react-router-dom'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
-import { AUTH_TOKEN } from './constants'
+import { AUTH_TOKEN, API_KEY } from './constants'
 import {isAuthenticated} from './helpers/auth'
 import PrivateRoute from './Components/Routes/PrivateRoute'
 
 
 const client = new ApolloClient({
-  uri: 'https://api-dev.newstory.io/graphql'
+  uri: 'https://api-dev.newstory.io/graphql',
+  headers: {
+    'ACCEPT': 'application/json',
+    'Content-Type': 'application/json',
+    'X-Api-Key': API_KEY,
+  }
 });
-
 
 let Home = () => {
   return (<h2>home</h2>)
 }
-
-console.log(isAuthenticated())
 
 function App() {
   return (
